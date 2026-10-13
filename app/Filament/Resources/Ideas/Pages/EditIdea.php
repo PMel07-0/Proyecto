@@ -8,12 +8,23 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditIdea extends EditRecord
 {
-    protected static string $resource = IdeaResource::class;
+protected static string $resource = IdeaResource::class;
 
-    protected function getHeaderActions(): array
+protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Idea modificada correctamente.';
+    }
+
+protected function getHeaderActions(): array
     {
         return [
             DeleteAction::make(),
         ];
     }
 }
+

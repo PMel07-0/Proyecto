@@ -8,12 +8,22 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditCategoria extends EditRecord
 {
-    protected static string $resource = CategoriaResource::class;
+protected static string $resource = CategoriaResource::class;
 
-    protected function getHeaderActions(): array
+protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Categoría modificada correctamente.';
+    }
+protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
-        ];
+            DeleteAction::make()
+            ->hidden(fn ($record) => $record -> ideas() -> exists()),
+            ];
     }
 }
